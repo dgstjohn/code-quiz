@@ -1,0 +1,48 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#intro {
+    width: 500px;
+    text-align: center;
+}
+
+#intro h1 {
+    text-align: center;
+    font-size: 36px;
+}
+
+#intro p {
+    font-size: 16px;
+    text-align: center;
+}
+
+#intro button {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.startBtn {
+    color: white;
+    background-color: darkslateblue;
+    /* add rounded corners */
+}
+
+#highscores{
+    /* float: left; */
+}
+
+#timer {
+    float: right;
+}
+
+#question-block {
+    float: none;
+    padding-bottom: 7px;
+    border-bottom: 2px solid grey;
+}
+
