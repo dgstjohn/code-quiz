@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,23 +8,29 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Quiz Challenge</title>
 </head>
+
 <body>
-    <div id="highscores" class="">
-        <button>High Scores</button>
-    </div>
-    <div id="timer">
-        Time remaining:
-        <!-- initialize timer to 75 seconds for five questions -->
+    <div class="top">
+        <div id="highscores" class="">
+            <button>High Scores</button>
+        </div>
+        <div id="timer">
+            Time remaining:
+            <!-- initialize timer to 75 seconds for five questions -->
+        </div>
     </div>
     <div id="intro">
         <h1>Coding Quiz Challenge</h1>
-        <p>Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect answers will reduce the time available -- and thus your score -- by 10 seconds each!</p>
+        <p>Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect
+            answers will reduce the time available -- and thus your score -- by 10 seconds each!</p>
         <button class="startBtn">Start Quiz</button>
     </div>
     <div id="question-block" class="hide">
-        <!-- place array here-->
+        <!-- generating an h2 and four buttons here-->
     </div>
+    <div id="correct" class="hide">Correct!</div>
     <div id="highscores" class="hide"></div>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

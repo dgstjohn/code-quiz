@@ -4,7 +4,8 @@
 
 #intro {
     width: 500px;
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #intro h1 {
@@ -20,6 +21,7 @@
 #intro button {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .hide {
@@ -32,12 +34,19 @@
     /* add rounded corners */
 }
 
-#highscores{
-    /* float: left; */
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#highscores {
+    display: flex;
+    justify-content: space-between;
 }
 
 #timer {
-    float: right;
+    display: flex;
+    justify-content: space-between;
 }
 
 #question-block {
@@ -46,3 +55,8 @@
     border-bottom: 2px solid grey;
 }
 
+.startBtn {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
