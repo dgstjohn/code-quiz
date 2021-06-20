@@ -19,34 +19,42 @@
 }
 
 #intro button {
+    color: white;
+    background-color: darkslateblue;
+        /* add rounded corners */
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    border-radius: 15px;
+}
+
+#intro button:active {
+    background-color: deeppink;
+}
+
+#intro button:focus {
+    background-color: deeppink;
+}
+.show {
+    display: contents;
 }
 
 .hide {
     display: none;
 }
 
-.startBtn {
-    color: white;
-    background-color: darkslateblue;
-    /* add rounded corners */
+#top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
 }
 
-.top {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-#highscores {
-    display: flex;
-    justify-content: space-between;
-}
+#highscoreslink {
+    /* width: 50%; */
+} 
 
 #timer {
-    display: flex;
-    justify-content: space-between;
+    /* width: 50%; */
 }
 
 #question-block {
@@ -55,8 +63,15 @@
     border-bottom: 2px solid grey;
 }
 
-.startBtn {
+/* .startBtn {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+} */
+
+#swapBlock {
+    width: 60%;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }

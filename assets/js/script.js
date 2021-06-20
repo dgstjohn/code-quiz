@@ -1,51 +1,63 @@
-var startBtn = document.querySelector("#startBtn")
-var questionsDiv = document.querySelector("#questions")
-var introDiv = document.querySelector("#intro")
-var TimeLeftSpan = document.querySelector("#TimeLeftSpan")
-var initialDiv = document.querySelector("#initialDiv")
-var title = document.querySelector("#title")
-var choice1 = document.querySelector("#choice1")
-var choice2 = document.querySelector("#choice2")
-var choice3 = document.querySelector("#choice3")
-var choice4 = document.querySelector("#choice4")
+// set variables
 
+var startBtn = document.querySelector("#startBtn");
+var introDiv = document.querySelector("#intro");;
+var questionsDiv = document.querySelector("#questions");
+var TimeLeftSpan = document.querySelector("#TimeLeftSpan");
+var initialDiv = document.querySelector("#initialDiv");
+var title = document.querySelector("#title");
+var choice1 = document.querySelector("#choice1");
+var choice2 = document.querySelector("#choice2");
+var choice3 = document.querySelector("#choice3");
+var choice4 = document.querySelector("#choice4");
+var choiceEl = document.createElement("button");
 
 // Set question array in a variable
+
 var questions = [
   {
     q: 'Commonly used data types do NOT include:',
-    choices: ['1. strings', '2. booleans', '3. alerts', '4. numbers']
+    choices: ['1. strings', '2. booleans', '3. alerts', '4. numbers'],
     a: '2'
   },
   {
     q: 'The condition in an if/else statement is enclosed within _____:',
-    choices;['1. quotes', '2. curly brackets', '3. parentheses', '4. square brackets']
+    choices: ['1. quotes', '2. curly brackets', '3. parentheses', '4. square brackets'],
     a: '1' 
   },
   {
     q: 'Arrays in JavaScript can be used to store ______:',
-    choices: ['1. numbers and strings', '2. other arrays', '3. booleans', '4. all of the above']
+    choices: ['1. numbers and strings', '2. other arrays', '3. booleans', '4. all of the above'],
     a: '3'
   },
   {
     q: 'String values must be enclosed within ______ when being assigned to variables.',
-    choices: ['1. commas', '2. quotes', '3. curly brackets', '4. parentheses']
+    choices: ['1. commas', '2. quotes', '3. curly brackets', '4. parentheses'],
     a: '1'
   },
   {
     q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
-    choices: ['1. JavaScript', '2. terminal/bash', '3. for loops', '4. console.log']
+    choices: ['1. JavaScript', '2. terminal/bash', '3. for loops', '4. console.log'],
     a: '3'
   }
 ];
 
-startBtn.addEventListener("click", function () {
-  questionsDiv.classList.remove("hide")
-  introDiv.classList.add("hide")
-  loadQuestion()
-  pidClock = setInterval(countDown, 1000)
+// create timer countdown function
+function countDown() {
+  if (timeRemaining === 0) {
+    clearInterval(pidClock)
+    questionsDiv.classList.add("hide")  //adding the hide class to make it invisible
+    initialDiv.classList.remove("hide") // removing the hide class to make it visible
 
-})
+  }
+  TimeLeftSpan.textContent = timeRemaining
+  timeRemaining--  // timeRemaining = timeRemaining-1
+
+
+}
+
+// create function to load questions into the questions div
+
 function loadQuestion() {
 
   title.textContent = questions[questionIndex].q
@@ -56,6 +68,14 @@ function loadQuestion() {
 
 
 }
+startBtn.addEventListener("click", function () {
+  questionsDiv.classList.remove("hide");
+  introDiv.classList.add("hide");
+  loadQuestion();
+  pidClock = setInterval(countDown, 1000);
+
+})
+
 
 choice1.addEventListener("click", function () {
   questionIndex++
@@ -75,19 +95,13 @@ choice4.addEventListener("click", function () {
 })
 
 // timer countdown function here
+startBtn.onclick = countdown;
 
-function countDown() {
-  if (timeRemaining === 0) {
-    clearInterval(pidClock)
-    questionsDiv.classList.add("hide")  //adding the hide class to make it invisible
-    initialDiv.classList.remove("hide") // removing the hide class to make it visible
-
-  }
-  TimeLeftSpan.textContent = timeRemaining
-  timeRemaining--  // timeRemaining = timeRemaining-1
-
-
-}
+//clear high scores 
+var clearHighScores = document.querySelector("#clearHighScoreBtn");
+clearHighScores.addEventListener("click", function(){
+  localStorage.clear()
+})
 
 //---------------LOCAL STORAGE CODE FOR HIGH SCORES------------------
 
@@ -103,7 +117,7 @@ function renderTodos(list) {
   // Empties out the html
   $('#to-dos').empty();
 
-  ///document.qeuerySelection("#to-dos").textContent=""
+  ///document.querySelection("#to-dos").textContent=""
 
   // Iterates over the 'list'
   for (var i = 0; i < list.length; i++) {
