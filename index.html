@@ -15,7 +15,7 @@
             <a href="./highscores.html">View high scores</a>
         </div>
         <div id="timer">
-            Time remaining:
+            Time remaining:<br /><span id="timeLeftSpan"></span>
             <!-- initialize timer to 75 seconds for five questions -->
         </div>
     </div>
@@ -24,13 +24,31 @@
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following coding-related questions within the time limit. Keep in mind that incorrect
                 answers will reduce the time available -- and thus your score -- by 10 seconds each!<br /><br />
-            <button class="startBtn">Start Quiz</button></p>
+                <button id="startBtn">Start Quiz</button>
+            </p>
         </div>
         <div id="questions" class="hide">
             <!-- generating an h2 and four buttons here-->
+            <h1 id="title"></h1>
+            <ul>
+                <li>
+                    <button id="choice1"></button>
+                </li>
+                <li>
+                    <button id="choice2"></button>
+                </li>
+                <li>
+                    <button id="choice3"></button>
+                </li>
+                <li>
+                    <button id="choice4"></button>
+                </li>
+            </ul>
         </div>
         <div id="correct" class="hide">Correct!</div>
-        <div id="highscores" class="hide"></div>
+        <div id="wrong" class="hide">Wrong!</div>
+        <!-- form here with entry for initials-->
+        <div id="gameover" class="hide"></div>
     </div>
     <script src="./assets/js/script.js"></script>
 </body>

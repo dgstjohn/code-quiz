@@ -1,16 +1,20 @@
 // set variables
 
-var startBtn = document.querySelector("#startBtn");
-var introDiv = document.querySelector("#intro");;
+var introDiv = document.querySelector("#intro");
 var questionsDiv = document.querySelector("#questions");
-var TimeLeftSpan = document.querySelector("#TimeLeftSpan");
+var questionIndex = 0;
+var gameoverDiv = document.querySelector("#gameover");
+var correctDiv = document.querySelector("#correct");
+var wrongDiv = document.querySelector("#wrong");
+var startBtn = document.querySelector("#startBtn");
+var timeLeftSpan = document.querySelector("#timeLeftSpan");
+// var pidClock = setInterval(countDown, 1000);
 var initialDiv = document.querySelector("#initialDiv");
 var title = document.querySelector("#title");
 var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
 var choice4 = document.querySelector("#choice4");
-var choiceEl = document.createElement("button");
 
 // Set question array in a variable
 
@@ -23,7 +27,7 @@ var questions = [
   {
     q: 'The condition in an if/else statement is enclosed within _____:',
     choices: ['1. quotes', '2. curly brackets', '3. parentheses', '4. square brackets'],
-    a: '1' 
+    a: '1'
   },
   {
     q: 'Arrays in JavaScript can be used to store ______:',
@@ -42,200 +46,131 @@ var questions = [
   }
 ];
 
+var timeRemaining = questions.length * 15; // set starting time left to 75 seconds
+
 // create timer countdown function
 function countDown() {
-  if (timeRemaining === 0) {
-    clearInterval(pidClock)
-    questionsDiv.classList.add("hide")  //adding the hide class to make it invisible
-    initialDiv.classList.remove("hide") // removing the hide class to make it visible
-
-  }
-  TimeLeftSpan.textContent = timeRemaining
-  timeRemaining--  // timeRemaining = timeRemaining-1
-
+  var timeInterval = setInterval(function () {
+    if (timeRemaining > 1) {
+      timeLeftSpan.textContent = timeRemaining; // insert time remaining onto HTML page
+      timeRemaining--;  // timeRemaining = timeRemaining - 1
+    }
+    else {
+      timeLeftSpan.textContent = "No time left!";
+      clearInterval(timeInterval);
+      questionsDiv.classList.add("hide");
+      gameoverDiv.classList.remove("hide");
+    }
+  }, 1000);
 
 }
+
+// if (timeRemaining === 0) {
+//   clearInterval(pidClock)
+//   introDiv.classList.add("hide")  //adding the hide class to make it invisible
+//   questionsDiv.classList.remove("hide") // removing the hide class to make it visible
+// }
+// else (timeRemaining > 0) {
+//   introDiv.classList.add("hide")  //adding the hide class to make it invisible
+//   questionsDiv.classList.remove("hide") // removing the hide class to make it visible
+// }
 
 // create function to load questions into the questions div
 
 function loadQuestion() {
-
-  title.textContent = questions[questionIndex].q
-  choice1.textContent = questions[questionIndex].choices[0]
-  choice2.textContent = questions[questionIndex].choices[1]
-  choice3.textContent = questions[questionIndex].choices[2]
-  choice4.textContent = questions[questionIndex].choices[3]
-
-
+  title.textContent = questions[questionIndex].q;
+  choice1.textContent = questions[questionIndex].choices[0];
+  choice2.textContent = questions[questionIndex].choices[1];
+  choice3.textContent = questions[questionIndex].choices[2];
+  choice4.textContent = questions[questionIndex].choices[3];
 }
+
+
 startBtn.addEventListener("click", function () {
-  questionsDiv.classList.remove("hide");
   introDiv.classList.add("hide");
+  questionsDiv.classList.remove("hide");
   loadQuestion();
-  pidClock = setInterval(countDown, 1000);
-
-})
-
+  countDown();
+});
 
 choice1.addEventListener("click", function () {
-  questionIndex++
-  loadQuestion()
-})
-choice2.addEventListener("click", function () {
-  questionIndex++
-  loadQuestion()
-})
-choice3.addEventListener("click", function () {
-  questionIndex++
-  loadQuestion()
-})
-choice4.addEventListener("click", function () {
-  questionIndex++
-  loadQuestion()
-})
-
-// timer countdown function here
-startBtn.onclick = countdown;
-
-//clear high scores 
-var clearHighScores = document.querySelector("#clearHighScoreBtn");
-clearHighScores.addEventListener("click", function(){
-  localStorage.clear()
-})
-
-//---------------LOCAL STORAGE CODE FOR HIGH SCORES------------------
-
-// Declares a 'list' variable that holds the parsed to-do items retrieved from 'localStorage'
-// If there is nothing in 'localStorage', sets the 'list' to an empty array
-
-//convert string back to object array
-var list = JSON.parse(localStorage.getItem('todolist')) || [];
-console.log(list)
-
-// Renders our to-dos to the page
-function renderTodos(list) {
-  // Empties out the html
-  $('#to-dos').empty();
-
-  ///document.querySelection("#to-dos").textContent=""
-
-  // Iterates over the 'list'
-  for (var i = 0; i < list.length; i++) {
-    // Creates a new variable 'toDoItem' that will hold a "<p>" tag
-    // Sets the `list` item's value as text of this <p> element
-    var toDoItem = $('<p>');  //document.createElement("p")
-    toDoItem.text(list[i]);  // document.querySelector("#to-dos").textContent=list[i]
-
-    // Creates a button `toDoClose` with an attribute called `data-to-do` and a unique `id`
-    var toDoClose = $('<button>');  //document.createElement("button")
-    toDoClose.attr('data-to-do', i);  //toDoClose.setAttribute("data-to-do",i)
-
-    // Gives the button a class called 'checkbox'
-    toDoClose.addClass('checkbox');  // toDoClose.classList.add('checkbox')
-
-    // Adds a checkmark symbol as its text value
-    toDoClose.text('✓');
-
-    // Adds the button to the `toDoItem`
-    toDoItem = toDoItem.prepend(toDoClose);
-
-    // Adds 'toDoItem' to the To-Do List div
-    $('#to-dos').append(toDoItem);
+  for (var i = 0; i < questions.length; i++) {
+    // grab value of clicked button 
+    var buttonchoice = questions[i].choices[i]
+    // Compare answers
+    if (
+      (buttonchoice === questions[i].a)
+    ) {
+      correctDiv.classList.remove("hide");
+    } else {
+      wrongDiv.classList.remove("hide");
+      timeRemaining = timeRemaining - 10;
+    }
   }
-}
-
-$('#add-to-do').on('click', function (event) {
-  event.preventDefault();
-
-  // Get the to-do "value" from the textbox and store it as a variable using `.val()` and `.trim()`
-  // YOUR CODE HERE
-  //
-  var toDo = $("#to-do").val().trim() //document.querySelector("#to-do").value.trim()
-
-
-
-  // Add the new to-do to our local 'list' variable
-  // YOUR CODE HERE
-  //
-  list.push(toDo)
-
-  // Update the to-dos on the page
-  // YOUR CODE HERE
-  //
-  renderTodos(list)
-  // Save the to-dos into localStorage
-  // We need to use JSON.stringify to turn the list from an array into a string
-  // YOUR CODE HERE
-  //
-
-  //it takes an object and converts into a string
-
-  localStorage.setItem("todolist", JSON.stringify(list))
-  // Clear the textbox when done using `.val()`
-
-  $("#to-do").val("")
-  // YOUR CODE HERE
-  //
+  questionIndex++;
+  loadQuestion();
 });
-
-$(document).on('click', '.checkbox', function () {
-  // Get the `id` of the button from its data attribute and hold in a variable called 'toDoNumber'
-  // YOUR CODE HERE
-  //
-  var index = $(this).attr("data-to-do") //this.getAttribute("data-to-do")
-  // Delete the to-do with that `id` from our local `list` using `.splice()`
-  // YOUR CODE HERE
-  //
-  index = parseInt(index)
-  list.splice(index, 1)
-  renderTodos(list)
-  // Update the to-dos on the page
-  // YOUR CODE HERE
-  //
-  // Save the to-dos into localStorage
-  // We need to use JSON.stringify to turn the list from an array into a string
-  // YOUR CODE HERE
-  localStorage.setItem("todolist", JSON.stringify(list))
-  //
+choice2.addEventListener("click", function () {
+  for (var i = 0; i < questions.length; i++) {
+    // grab value of clicked button 
+    var buttonchoice = questions[i].choices[i]
+    // Compare answers
+    if (
+      (buttonchoice === questions[i].a)
+    ) {
+      correctDiv.classList.remove("hide");
+    } else {
+      wrongDiv.classList.remove("hide");
+      timeRemaining = timeRemaining - 10;
+    }
+  }
+  questionIndex++;
+  loadQuestion();
 });
+choice3.addEventListener("click", function () {
+  for (var i = 0; i < questions.length; i++) {
+    // grab value of clicked button 
+    var buttonchoice = questions[i].choices[i]
+    // Compare answers
+    if (
+      (buttonchoice === questions[i].a)
+    ) {
+      correctDiv.classList.remove("hide");
+    } else {
+      wrongDiv.classList.remove("hide");
+      timeRemaining = timeRemaining - 10;
+    }
+  }
+  questionIndex++;
+  loadQuestion();
+});
+choice4.addEventListener("click", function () {
+  for (var i = 0; i < questions.length; i++) {
+    // grab value of clicked button 
+    var buttonchoice = questions[i].choices[i]
+    // Compare answers
+    if (
+      (buttonchoice === questions[i].a)
+    ) {
+      correctDiv.classList.remove("hide");
+    } else {
+      wrongDiv.classList.remove("hide");
+      timeRemaining = timeRemaining - 10;
+    }
+  }
+  questionIndex++;
+  loadQuestion();
+});
+// choice2.addEventListener("click", function () {
+//   questionIndex++;
+//   loadQuestion();
+// });
+// choice3.addEventListener("click", function () {
+//   questionIndex++;
+//   loadQuestion();
+// });
+// choice4.addEventListener("click", function () {
+//   questionIndex++;
+//   loadQuestion();
+// });
 
-// Renders our to-dos on page load
-renderTodos(list);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ------------MY STUFF---------------
-// pass q string to an h2 
-document.querySelector
-// pass choice string to a button
-document.querySelector(questions[choices]) = "<button>";
-// listen for button click
-// loop over all the question objects
-for (let index = 0; questions < array.length; index++) {
-  document.addEventListener('click',)
-  var answer = a;
-}
-// if button clicked matches a, show "Correct!" value in HTML, proceed to next question and rehide correct/wrong block
-// if button clicked does not match, reduce timer by 10000 milliseconds, display "Wrong!" value and continue loop
-if (
-  (answer === [i]])
-  )
-
-
-// set timer to count down from 75 seconds
-var timer = setInterval(, 75000);
-// pass timer to div based on timer id
-document.getElementById("#timer") = "<p>";
