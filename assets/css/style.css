@@ -2,7 +2,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#intro {
+#top {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
+#intro, #highScoresTable {
     width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -21,7 +27,6 @@
 #intro button {
     color: white;
     background-color: darkslateblue;
-        /* add rounded corners */
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -35,43 +40,32 @@
 #intro button:focus {
     background-color: deeppink;
 }
-.show {
-    display: contents;
-}
 
 .hide {
     display: none;
 }
 
-#top {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 30px;
+#correct, #wrong {
+    margin-top: 5px;
+    border-top: 2px solid grey;
+    padding-top: 7px;
+    font-weight: bold;
+    font-style: italic;
 }
 
-#highscoreslink {
-    /* width: 50%; */
-} 
-
-#timer {
-    /* width: 50%; */
-}
-
-#question-block {
-    float: none;
-    padding-bottom: 7px;
-    border-bottom: 2px solid grey;
-}
-
-/* .startBtn {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-} */
-
-#swapBlock {
+#swapBlock, #swapBlock2 {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#questions ul li {
+    list-style-type: none;
+}
+
+#questions ul li button, #gameover button, #highScoresTable button {
+    color: white;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin: 0 0 5px 5px;
 }

@@ -8,8 +8,6 @@ var correctDiv = document.querySelector("#correct");
 var wrongDiv = document.querySelector("#wrong");
 var startBtn = document.querySelector("#startBtn");
 var timeLeftSpan = document.querySelector("#timeLeftSpan");
-// var pidClock = setInterval(countDown, 1000);
-var initialDiv = document.querySelector("#initialDiv");
 var title = document.querySelector("#title");
 var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
@@ -22,27 +20,27 @@ var questions = [
   {
     q: 'Commonly used data types do NOT include:',
     choices: ['1. strings', '2. booleans', '3. alerts', '4. numbers'],
-    a: '2'
+    a: '3. alerts'
   },
   {
     q: 'The condition in an if/else statement is enclosed within _____:',
     choices: ['1. quotes', '2. curly brackets', '3. parentheses', '4. square brackets'],
-    a: '1'
+    a: '2. curly brackets'
   },
   {
     q: 'Arrays in JavaScript can be used to store ______:',
     choices: ['1. numbers and strings', '2. other arrays', '3. booleans', '4. all of the above'],
-    a: '3'
+    a: '4. all of the above'
   },
   {
     q: 'String values must be enclosed within ______ when being assigned to variables.',
     choices: ['1. commas', '2. quotes', '3. curly brackets', '4. parentheses'],
-    a: '1'
+    a: '2. quotes'
   },
   {
     q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
     choices: ['1. JavaScript', '2. terminal/bash', '3. for loops', '4. console.log'],
-    a: '3'
+    a: '4. console.log'
   }
 ];
 
@@ -94,83 +92,88 @@ startBtn.addEventListener("click", function () {
 });
 
 choice1.addEventListener("click", function () {
-  for (var i = 0; i < questions.length; i++) {
-    // grab value of clicked button 
-    var buttonchoice = questions[i].choices[i]
-    // Compare answers
-    if (
-      (buttonchoice === questions[i].a)
-    ) {
-      correctDiv.classList.remove("hide");
-    } else {
-      wrongDiv.classList.remove("hide");
-      timeRemaining = timeRemaining - 10;
-    }
-  }
+  // for (var i = 0; i < questions.length; i++) {
+  // grab value of clicked button 
+  var buttonchoice = questions[questionIndex].choices[0];
+  console.log(buttonchoice);
+  // }
   questionIndex++;
   loadQuestion();
+  if (
+    (buttonchoice === questions[questionIndex].a)
+  ) {
+    correctDiv.classList.remove("hide");
+    wrongDiv.classList.add("hide");
+  } else {
+    wrongDiv.classList.remove("hide");
+    correctDiv.classList.add("hide");
+    timeRemaining = timeRemaining - 10;
+  }
 });
 choice2.addEventListener("click", function () {
-  for (var i = 0; i < questions.length; i++) {
-    // grab value of clicked button 
-    var buttonchoice = questions[i].choices[i]
-    // Compare answers
-    if (
-      (buttonchoice === questions[i].a)
-    ) {
-      correctDiv.classList.remove("hide");
-    } else {
-      wrongDiv.classList.remove("hide");
-      timeRemaining = timeRemaining - 10;
-    }
+  // for (var i = 0; i < questions.length; i++) {
+  // grab value of clicked button 
+  var buttonchoice = questions[questionIndex].choices[1];
+  console.log(buttonchoice);
+
+  // Compare answers
+  if (
+    (buttonchoice === questions[questionIndex].a)
+
+  ) {
+    correctDiv.classList.remove("hide");
+  } else {
+    wrongDiv.classList.remove("hide");
+    timeRemaining = timeRemaining - 10;
   }
+  // }
   questionIndex++;
   loadQuestion();
 });
 choice3.addEventListener("click", function () {
-  for (var i = 0; i < questions.length; i++) {
-    // grab value of clicked button 
-    var buttonchoice = questions[i].choices[i]
-    // Compare answers
-    if (
-      (buttonchoice === questions[i].a)
-    ) {
-      correctDiv.classList.remove("hide");
-    } else {
-      wrongDiv.classList.remove("hide");
-      timeRemaining = timeRemaining - 10;
-    }
+  // for (var i = 0; i < questions.length; i++) {
+  // grab value of clicked button 
+  var buttonchoice = questions[questionIndex].choices[2];
+  console.log(buttonchoice);
+
+  // Compare answers
+  if (
+    (buttonchoice === questions[questionIndex].a)
+
+  ) {
+    correctDiv.classList.remove("hide");
+  } else {
+    wrongDiv.classList.remove("hide");
+    timeRemaining = timeRemaining - 10;
   }
+  // }
   questionIndex++;
   loadQuestion();
 });
 choice4.addEventListener("click", function () {
-  for (var i = 0; i < questions.length; i++) {
-    // grab value of clicked button 
-    var buttonchoice = questions[i].choices[i]
-    // Compare answers
-    if (
-      (buttonchoice === questions[i].a)
-    ) {
-      correctDiv.classList.remove("hide");
-    } else {
-      wrongDiv.classList.remove("hide");
-      timeRemaining = timeRemaining - 10;
-    }
+  // for (var i = 0; i < questions.length; i++) {
+  // grab value of clicked button 
+  var buttonchoice = questions[questionIndex].choices[3];
+  console.log(buttonchoice);
+  // Compare answers
+  if (
+    (buttonchoice === questions[questionIndex].a)
+
+  ) {
+    correctDiv.classList.remove("hide");
+  } else {
+    wrongDiv.classList.remove("hide");
+    timeRemaining = timeRemaining - 10;
   }
+  // }
   questionIndex++;
   loadQuestion();
 });
-// choice2.addEventListener("click", function () {
-//   questionIndex++;
-//   loadQuestion();
-// });
-// choice3.addEventListener("click", function () {
-//   questionIndex++;
-//   loadQuestion();
-// });
-// choice4.addEventListener("click", function () {
-//   questionIndex++;
-//   loadQuestion();
-// });
+// clear high scores 
+var clearHighScores = document.querySelector("#clearHighScoreBtn");
+clearHighScores.addEventListener("click", function () {
+  localStorage.clear();
+});
+
+
 
