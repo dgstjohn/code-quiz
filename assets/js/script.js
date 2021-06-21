@@ -13,6 +13,7 @@ var choice1 = document.querySelector("#choice1");
 var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
 var choice4 = document.querySelector("#choice4");
+var finalScore = document.querySelector("#finalscore");
 
 // Set question array in a variable
 
@@ -34,8 +35,8 @@ var questions = [
   },
   {
     q: 'String values must be enclosed within ______ when being assigned to variables.',
-    choices: ['1. commas', '2. quotes', '3. curly brackets', '4. parentheses'],
-    a: '2. quotes'
+    choices: ['1. quotes', '2. commas', '3. curly brackets', '4. parentheses'],
+    a: '1. quotes'
   },
   {
     q: 'A very useful tool used during development and debugging for printing content to the debugger is:',
@@ -60,18 +61,7 @@ function countDown() {
       gameoverDiv.classList.remove("hide");
     }
   }, 1000);
-
 }
-
-// if (timeRemaining === 0) {
-//   clearInterval(pidClock)
-//   introDiv.classList.add("hide")  //adding the hide class to make it invisible
-//   questionsDiv.classList.remove("hide") // removing the hide class to make it visible
-// }
-// else (timeRemaining > 0) {
-//   introDiv.classList.add("hide")  //adding the hide class to make it invisible
-//   questionsDiv.classList.remove("hide") // removing the hide class to make it visible
-// }
 
 // create function to load questions into the questions div
 
@@ -83,7 +73,6 @@ function loadQuestion() {
   choice4.textContent = questions[questionIndex].choices[3];
 }
 
-
 startBtn.addEventListener("click", function () {
   introDiv.classList.add("hide");
   questionsDiv.classList.remove("hide");
@@ -92,13 +81,7 @@ startBtn.addEventListener("click", function () {
 });
 
 choice1.addEventListener("click", function () {
-  // for (var i = 0; i < questions.length; i++) {
-  // grab value of clicked button 
   var buttonchoice = questions[questionIndex].choices[0];
-  console.log(buttonchoice);
-  // }
-  questionIndex++;
-  loadQuestion();
   if (
     (buttonchoice === questions[questionIndex].a)
   ) {
@@ -108,72 +91,88 @@ choice1.addEventListener("click", function () {
     wrongDiv.classList.remove("hide");
     correctDiv.classList.add("hide");
     timeRemaining = timeRemaining - 10;
+  };
+  questionIndex++;
+  if (questionIndex < 5) {
+    loadQuestion();
+  }
+  else {
+    finalScore.textContent = timeRemaining;
+    questionsDiv.classList.add("hide");
+    gameoverDiv.classList.remove("hide");
   }
 });
+
 choice2.addEventListener("click", function () {
-  // for (var i = 0; i < questions.length; i++) {
-  // grab value of clicked button 
   var buttonchoice = questions[questionIndex].choices[1];
-  console.log(buttonchoice);
-
-  // Compare answers
   if (
     (buttonchoice === questions[questionIndex].a)
-
   ) {
     correctDiv.classList.remove("hide");
+    wrongDiv.classList.add("hide");
   } else {
     wrongDiv.classList.remove("hide");
+    correctDiv.classList.add("hide");
     timeRemaining = timeRemaining - 10;
-  }
-  // }
+  };
   questionIndex++;
-  loadQuestion();
+  if (questionIndex < 5) {
+    loadQuestion();
+  }
+  else {
+    finalScore = timeRemaining;
+    questionsDiv.classList.add("hide");
+    gameoverDiv.classList.remove("hide");
+  }
 });
-choice3.addEventListener("click", function () {
-  // for (var i = 0; i < questions.length; i++) {
-  // grab value of clicked button 
-  var buttonchoice = questions[questionIndex].choices[2];
-  console.log(buttonchoice);
 
-  // Compare answers
+choice3.addEventListener("click", function () {
+  var buttonchoice = questions[questionIndex].choices[2];
   if (
     (buttonchoice === questions[questionIndex].a)
-
   ) {
     correctDiv.classList.remove("hide");
+    wrongDiv.classList.add("hide");
   } else {
     wrongDiv.classList.remove("hide");
+    correctDiv.classList.add("hide");
     timeRemaining = timeRemaining - 10;
-  }
-  // }
+  };
   questionIndex++;
-  loadQuestion();
+  if (questionIndex < 5) {
+    loadQuestion();
+  }
+  else {
+    finalScore = timeRemaining;
+    questionsDiv.classList.add("hide");
+    gameoverDiv.classList.remove("hide");
+  }
 });
 choice4.addEventListener("click", function () {
-  // for (var i = 0; i < questions.length; i++) {
-  // grab value of clicked button 
   var buttonchoice = questions[questionIndex].choices[3];
-  console.log(buttonchoice);
-  // Compare answers
   if (
     (buttonchoice === questions[questionIndex].a)
-
   ) {
     correctDiv.classList.remove("hide");
+    wrongDiv.classList.add("hide");
   } else {
     wrongDiv.classList.remove("hide");
+    correctDiv.classList.add("hide");
     timeRemaining = timeRemaining - 10;
-  }
-  // }
+  };
   questionIndex++;
-  loadQuestion();
+  if (questionIndex < 5) {
+    loadQuestion();
+  }
+  else {
+    finalScore = timeRemaining;
+    questionsDiv.classList.add("hide");
+    gameoverDiv.classList.remove("hide");
+  }
 });
-// clear high scores 
-var clearHighScores = document.querySelector("#clearHighScoreBtn");
-clearHighScores.addEventListener("click", function () {
-  localStorage.clear();
-});
 
-
-
+// // clear high scores 
+// var clearHighScores = document.querySelector("#clearHighScoreBtn");
+// clearHighScores.addEventListener("click", function () {
+//   localStorage.clear();
+// });
