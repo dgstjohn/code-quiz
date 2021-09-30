@@ -1,8 +1,7 @@
 // set variables
 
-var introDiv = document.querySelector("#intro");
+var introDiv = document.querySelector("#intro"); // checked
 var questionsDiv = document.querySelector("#questions");
-var questionIndex = 0;
 var gameoverDiv = document.querySelector("#gameover");
 var correctDiv = document.querySelector("#correct");
 var wrongDiv = document.querySelector("#wrong");
@@ -14,6 +13,13 @@ var choice2 = document.querySelector("#choice2");
 var choice3 = document.querySelector("#choice3");
 var choice4 = document.querySelector("#choice4");
 var finalScore = document.querySelector("#finalscore");
+var submitInitials = document.querySelector("#submitInitials");
+var storeHighScores = [];
+var getHighScore = document.querySelector("#highscorelist");
+var showHighScore = document.createElement("ul");
+var questionIndex = 0; // checked
+var timeRemaining = questions.length * 15; // set starting time left to 75 seconds  // checked
+
 
 // Set question array in a variable
 
@@ -26,7 +32,7 @@ var questions = [
   {
     q: 'The condition in an if/else statement is enclosed within _____:',
     choices: ['1. quotes', '2. curly brackets', '3. parentheses', '4. square brackets'],
-    a: '2. curly brackets'
+    a: '3. parentheses'
   },
   {
     q: 'Arrays in JavaScript can be used to store ______:',
@@ -45,23 +51,29 @@ var questions = [
   }
 ];
 
-var timeRemaining = questions.length * 15; // set starting time left to 75 seconds
 
 // create timer countdown function
 function countDown() {
   var timeInterval = setInterval(function () {
-    if (timeRemaining > 1) {
+    if (timeRemaining > 1 && questionIndex < 5) {
       timeLeftSpan.textContent = timeRemaining; // insert time remaining onto HTML page
       timeRemaining--;  // timeRemaining = timeRemaining - 1
+    }
+    else if (timeRemaining > 1 && questionIndex === 5) {
+      questionsDiv.classList.add("hide");
+      gameoverDiv.classList.remove("hide");
+      finalScore.textContent = timeRemaining.toString();
     }
     else {
       timeLeftSpan.textContent = "No time left!";
       clearInterval(timeInterval);
       questionsDiv.classList.add("hide");
       gameoverDiv.classList.remove("hide");
+      finalScore.textContent = "0";
     }
   }, 1000);
 }
+
 
 // create function to load questions into the questions div
 
@@ -97,9 +109,11 @@ choice1.addEventListener("click", function () {
     loadQuestion();
   }
   else {
-    finalScore.textContent = timeRemaining;
     questionsDiv.classList.add("hide");
+    wrongDiv.classList.add("hide");
+    correctDiv.classList.add("hide");
     gameoverDiv.classList.remove("hide");
+    finalScore.textContent = timeRemaining.toString();
   }
 });
 
@@ -120,9 +134,11 @@ choice2.addEventListener("click", function () {
     loadQuestion();
   }
   else {
-    finalScore = timeRemaining;
     questionsDiv.classList.add("hide");
+    wrongDiv.classList.add("hide");
+    correctDiv.classList.add("hide");
     gameoverDiv.classList.remove("hide");
+    finalScore.textContent = timeRemaining.toString();
   }
 });
 
@@ -143,9 +159,11 @@ choice3.addEventListener("click", function () {
     loadQuestion();
   }
   else {
-    finalScore = timeRemaining;
     questionsDiv.classList.add("hide");
+    wrongDiv.classList.add("hide");
+    correctDiv.classList.add("hide");
     gameoverDiv.classList.remove("hide");
+    finalScore.textContent = timeRemaining.toString();
   }
 });
 choice4.addEventListener("click", function () {
@@ -165,14 +183,20 @@ choice4.addEventListener("click", function () {
     loadQuestion();
   }
   else {
-    finalScore = timeRemaining;
     questionsDiv.classList.add("hide");
+    wrongDiv.classList.add("hide");
+    correctDiv.classList.add("hide");
     gameoverDiv.classList.remove("hide");
+    finalScore.textContent = timeRemaining.toString();
   }
 });
 
-// // clear high scores 
-// var clearHighScores = document.querySelector("#clearHighScoreBtn");
-// clearHighScores.addEventListener("click", function () {
-//   localStorage.clear();
-// });
+submitInitials.addEventListener("click", function(){
+  var initials = document.getElementById("initials").value;
+  var finalscore = document.getElementById("finalscore").innerHTML;
+  var highScoreObj = {
+    name: initials,
+    score: finalscore
+  }
+  localStorage.setItem("highscore", JSON.stringify(highScoreObj));
+});
