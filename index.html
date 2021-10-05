@@ -15,7 +15,7 @@
             <a href="./highscores.html">View high scores</a>
         </div>
         <div id="timer">
-            Time remaining:<br /><span id="timeLeftSpan"></span> <!-- had 0 in span-->
+            Time remaining:<br /><span id="timeLeftSpan">0</span>
             <!-- initialize timer to 75 seconds for five questions -->
         </div>
     </div>
@@ -28,27 +28,8 @@
             </p>
         </div>
         <div id="questions" class="hide">
-            <!-- generating an h2 and four buttons here-->
             <h1 id="title"></h1>
-            <ul> <!-- this is generated with a "choices" id/class div -->
-                <li>
-                    <button id="choice1"></button>
-                </li>
-                <li>
-                    <button id="choice2"></button>
-                </li>
-                <li>
-                    <button id="choice3"></button>
-                </li>
-                <li>
-                    <button id="choice4"></button>
-                </li>
-            </ul>
         </div>
-        <!-- correct and wrong are in the choices div -->
-        <div id="correct" class="hide">Correct!</div>
-        <div id="wrong" class="hide">Wrong!</div>
-        <!-- form here with entry for initials-->
         <div id="gameover" class="hide">
             <h1>The game is over!</h1>  
             <p>Your final score is <span id="finalscore"></span>.</p>
@@ -58,7 +39,7 @@
             </p>
         </div>
     </div>
-    <script src="./assets/js/script.js"></script> <!-- this is questions.js and logic.js -->
+    <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
