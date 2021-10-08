@@ -41,12 +41,19 @@
     background-color: deeppink;
 }
 
+#questions button {
+    color: white;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-right: 10px;
+}
+
 .hide {
     display: none;
 }
 
 #correct, #wrong {
-    margin-top: 5px;
+    margin-top: 30px;
     border-top: 2px solid grey;
     padding-top: 7px;
     font-weight: bold;
