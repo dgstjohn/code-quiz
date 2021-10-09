@@ -8,7 +8,7 @@ var wrongDiv = document.querySelector("#wrong");
 var startBtn = document.querySelector("#startBtn"); // checked
 var title = document.querySelector("#title");
 var finalScore = document.querySelector("#finalscore");
-var submitInitials = document.querySelector("#submitInitials"); // checked
+var submitBtn = document.querySelector("#submitInitials"); // checked
 var getHighScore = document.querySelector("#highscorelist");
 var showHighScore = document.createElement("ul");
 var questionIndex = 0; // checked
@@ -16,7 +16,7 @@ var timeInterval;
 var timeRemaining = 75; // set starting time left to 75 seconds  // checked
 var timeLeftSpan = document.getElementById("timeLeftSpan"); //checked
 var choicesEl = document.getElementById("choices");
-
+var initialsEl = document.getElementById("initials");
 
 
 // Set question array in a variable
@@ -123,6 +123,21 @@ function endOfQuiz() {
   finalScore.textContent = timeRemaining;
 };
 
+function saveScore() {
+  var initials = initialsEl.value;
+  if (initials !== "") {
+    var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
+
+    var highScoreObj = {
+      score: timeRemaining,
+      name: initials      
+    };
+    highscores.push(highScoreObj);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+    window.location.href = "highscores.html";
+  }
+};
+
 // create timer countdown function
 function countDown() {
   timeRemaining--;  // timeRemaining = timeRemaining - 1
@@ -132,20 +147,10 @@ function countDown() {
   }
 };
 
-// function saveScore() {
-
-// };
-
-submitInitials.addEventListener("click", function () {
-  var initials = document.getElementById("initials").value;
-  var finalscore = document.getElementById("finalscore").innerHTML;
-  var highScoreObj = {
-    name: initials,
-    score: finalscore
-  }
-  console.log(highScoreObj);
-  localStorage.setItem("highscore", JSON.stringify(highScoreObj));
-});
+// save scores
+submitBtn.onclick = saveScore;
 
 // call start function
-startBtn.addEventListener("click", startOfQuiz);
+startBtn.onclick = startOfQuiz;
+
+

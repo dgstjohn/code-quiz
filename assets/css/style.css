@@ -33,19 +33,15 @@
     border-radius: 15px;
 }
 
-#intro button:active {
-    background-color: deeppink;
-}
-
-#intro button:focus {
-    background-color: deeppink;
-}
-
 #questions button {
     color: white;
     background-color: darkslateblue;
     border-radius: 15px;
     margin-right: 10px;
+}
+
+#intro button:active, #intro button:focus, #questions button:active, #questions button:focus {
+    background-color: deeppink;
 }
 
 .hide {

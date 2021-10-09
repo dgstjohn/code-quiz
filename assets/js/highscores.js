@@ -11,7 +11,7 @@ function showScores () {
     // loop through retrieved scores and display
     highScores.forEach(function(score) {
         var showScore = document.createElement("li");
-        showScore.textContent = score.initials + ": " + score.score;
+        showScore.textContent = score.name + ": " + score.score;
         var getScores = document.getElementById("highScoreList");
         getScores.appendChild(showScore);
     })
