@@ -33,14 +33,14 @@
     border-radius: 15px;
 }
 
-#questions button {
+#questions button, #goBackBtn button, #clearHighScoreBtn button {
     color: white;
     background-color: darkslateblue;
     border-radius: 15px;
     margin-right: 10px;
 }
 
-#intro button:active, #intro button:focus, #questions button:active, #questions button:focus {
+#intro button:active, #intro button:focus, #questions button:active, #questions button:focus, #goBackBtn button:active, #goBackBtn button:focus, #clearHighScoreBtn button:focus {
     background-color: deeppink;
 }
 

@@ -1,26 +1,23 @@
 // set variables
-
-var introDiv = document.querySelector("#intro"); // checked
-var questionsDiv = document.getElementById("questions"); // checked
-var gameoverDiv = document.querySelector("#gameover");
+var questionIndex = 0; // checked
+var introDiv = document.querySelector("#intro");
+var questionsDiv = document.getElementById("questions");
 var correctDiv = document.querySelector("#correct");
 var wrongDiv = document.querySelector("#wrong");
-var startBtn = document.querySelector("#startBtn"); // checked
-var title = document.querySelector("#title");
+var gameoverDiv = document.querySelector("#gameover");
 var finalScore = document.querySelector("#finalscore");
+var titleEl = document.getElementById("title");
+var choicesEl = document.getElementById("choices");
+var initialsEl = document.getElementById("initials");
+var startBtn = document.querySelector("#startBtn"); // checked
 var submitBtn = document.querySelector("#submitInitials"); // checked
-var getHighScore = document.querySelector("#highscorelist");
-var showHighScore = document.createElement("ul");
-var questionIndex = 0; // checked
+
+// set time-related variables
 var timeInterval;
 var timeRemaining = 75; // set starting time left to 75 seconds  // checked
 var timeLeftSpan = document.getElementById("timeLeftSpan"); //checked
-var choicesEl = document.getElementById("choices");
-var initialsEl = document.getElementById("initials");
 
-
-// Set question array in a variable
-
+// set question array in a variable
 var questions = [
   {
     q: 'Commonly used data types do NOT include:',
@@ -62,7 +59,6 @@ function startOfQuiz() {
 // create function to load questions into the questions div
 function loadQuestion() {
   var showQuestion = questions[questionIndex];
-  var titleEl = document.getElementById("title");
   titleEl.textContent = showQuestion.q;
   choicesEl.innerHTML = "";
   // display choices
@@ -105,7 +101,7 @@ function clickForAnswer() {
   if (questionIndex === questions.length) {
     endOfQuiz();
   }
-  // otherwise go to next question in loadQuestion function
+  // otherwise, go to next question in loadQuestion function
   else {
     loadQuestion();
   }
@@ -124,16 +120,21 @@ function endOfQuiz() {
 };
 
 function saveScore() {
+  // grab initials
   var initials = initialsEl.value;
+  // either get existing high scores from localStorage or create a new array to hold them
   if (initials !== "") {
     var highscores = JSON.parse(localStorage.getItem("highscores")) || [];
-
+    // create the new saved name/score pair
     var highScoreObj = {
       score: timeRemaining,
       name: initials      
     };
+    // push new final score to high scores array
     highscores.push(highScoreObj);
+    // move the revised high scores array to localStorage
     localStorage.setItem("highscores", JSON.stringify(highscores));
+    // go to the high scores page
     window.location.href = "highscores.html";
   }
 };
