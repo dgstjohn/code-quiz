@@ -66,7 +66,7 @@
     list-style-type: none;
 }
 
-#questions ul li button, #gameover button, #highScoresTable button {
+#questions ul li button, #gameover button, #highScoreList button, #goBackBtn button, #clearHighScoreBtn button {
     color: white;
     background-color: darkslateblue;
     border-radius: 15px;
